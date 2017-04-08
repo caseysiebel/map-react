@@ -1,6 +1,13 @@
 import React from 'react';
 //import { render } from 'react-dom';
-import { Map, Polyline, Marker, Popup, TileLayer, LayersControl } from 'react-leaflet';
+import { 
+    Map, 
+    Polyline, 
+    Marker, 
+    Popup, 
+    TileLayer, 
+    LayersControl
+} from 'react-leaflet';
 
 const { BaseLayer, Overlay } = LayersControl
 
@@ -41,14 +48,16 @@ export default class MapContainer extends React.Component {
     render() {
         return (
             <Map center={position} zoom={15}>
-				<Polyline color='red' positions={multiPolyline} />
+                <TileLayer
+                  attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                  url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                />
                 <LayersControl position='topright'>
-					<BaseLayer checked name='OpenStreetMap.Mapnik'>
-					<TileLayer
-					  attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					  url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-					/>
-				  </BaseLayer>
+                    <Overlay name='routes'>
+                        <Polyline color='red' positions={multiPolyline} />
+                    </Overlay>
+
+
 
                 </LayersControl>
 

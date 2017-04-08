@@ -50,7 +50,7 @@ export default class MapContainer extends React.Component {
                     { 
                         polys.map((poly, i) => {
                             return (
-                                <Overlay name={i + 1}>
+                                <Overlay name={String(i + 1)} key={i}>
                                     <Polyline color='red' positions={poly} />
                                 </Overlay>
                             )
@@ -61,7 +61,7 @@ export default class MapContainer extends React.Component {
                     { 
                         polys.map((poly, i) => {
                             return (
-                                <Overlay name={i + 1}>
+                                <Overlay name={String(i + 1)} key={i}>
                                     <Polyline color='red' positions={poly} />
                                 </Overlay>
                             )

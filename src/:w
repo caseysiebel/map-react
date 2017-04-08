@@ -29,18 +29,35 @@ let parsed3 = parser(route3)
 
 let position =  midPointGen([ parsed1, parsed2, parsed3 ])
 
+const multiPolyline = [
+    genPolyline(parsed1),
+    genPolyline(parsed2),
+    genPolyline(parsed3)
+]
+
 const polys = [
     genPolyline(parsed1),
     genPolyline(parsed2),
     genPolyline(parsed3)
 ]
 
+
+
 export default class MapContainer extends React.Component {
+    state = {
+        center: midPointGen([ parsed1, parsed2, parsed3 ])
+    }
+    handleClick(e) {
+        console.log('click')
+        this.setState({ center: e.latlng })
+    }
     render() {
         return (
             <Map 
-                center={position}
+                center={this.state.center} 
                 zoom={15}
+                animate
+                onClick={this.handleClick.bind(this)}
             >
                 <TileLayer
                   attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -51,7 +68,11 @@ export default class MapContainer extends React.Component {
                         polys.map((poly, i) => {
                             return (
                                 <Overlay name={i + 1}>
-                                    <Polyline color='red' positions={poly} />
+                                        <Tooltip permanate>
+                                    <Polyline color='red' positions={poly} >
+                                            <span>Here is a bunch of text to display</span>
+                                    </Polyline>
+                                        </Tooltip>
                                 </Overlay>
                             )
                         })

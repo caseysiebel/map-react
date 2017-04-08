@@ -11,11 +11,7 @@ import {
 
 const { BaseLayer, Overlay } = LayersControl
 
-
 import ToggleContainer from './ToggleContainer'
-
-console.log('LayersControl', LayersControl)
-console.log('BaseLayer', BaseLayer)
 
 import parser from './parser'
 
@@ -26,16 +22,11 @@ import route3 from './data/route3'
 import midPointGen from './midPointFinder'
 import genPolyline from './genPolyline'
 
-//console.log('route2', route2)
-//console.log('route3', route3)
-
 let parsed1 = parser(route1)
 let parsed2 = parser(route2)
 let parsed3 = parser(route3)
 
 let position =  midPointGen([ parsed1, parsed2, parsed3 ])
-
-//console.log('position', position)
 
 const multiPolyline = [
     genPolyline(parsed1),
@@ -43,24 +34,45 @@ const multiPolyline = [
     genPolyline(parsed3)
 ]
 
-console.log('multiline', multiPolyline)
+const polys = [
+    genPolyline(parsed1),
+    genPolyline(parsed2),
+    genPolyline(parsed3)
+]
+
+
+
 export default class MapContainer extends React.Component {
+    state = {
+        center: midPointGen([ parsed1, parsed2, parsed3 ])
+    }
+    handleClick(e) {
+        console.log('click')
+        this.setState({ center: e.latlng })
+    }
     render() {
         return (
-            <Map center={position} zoom={15}>
+            <Map 
+                center={this.state.center} 
+                zoom={15}
+                animate
+                onClick={this.handleClick.bind(this)}
+            >
                 <TileLayer
                   attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
                 <LayersControl position='topright'>
-                    <Overlay name='routes'>
-                        <Polyline color='red' positions={multiPolyline} />
-                    </Overlay>
-
-
-
+                    { 
+                        polys.map(poly => {
+                            return (
+                                <Overlay name='routes'>
+                                    <Polyline color='red' positions={poly} />
+                                </Overlay>
+                            )
+                        })
+                    }
                 </LayersControl>
-
             </Map>
         )
     }

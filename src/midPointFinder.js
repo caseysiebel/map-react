@@ -5,8 +5,8 @@ module.exports = (routes) => {
 
     let midpoint = agRoutes.reduce((crt, nxt) => {
         return [ 
-            crt[0]+(Number(nxt.lat)/agRoutes.length),
-            crt[1]+(Number(nxt.lng)/agRoutes.length)
+            crt[0]+(Number(nxt.lng)/agRoutes.length),
+            crt[1]+(Number(nxt.lat)/agRoutes.length)
         ]
     }, [0, 0])
 

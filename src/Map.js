@@ -18,6 +18,7 @@ let parsed2 = parser(route2)
 
 let position =  midPointGen([ parsed1, parsed2 ])
 
+console.log('position', position)
 /*
 const polyline = [
     [37.775,	-122.401],
@@ -38,6 +39,7 @@ const multiPolyline = [
     genPolyline(parsed1),
     genPolyline(parsed2),
 ]
+console.log('multiPolyline', multiPolyline)
 
 export default class MapContainer extends React.Component {
     render() {
@@ -47,12 +49,6 @@ export default class MapContainer extends React.Component {
                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
-                <Marker position={position}>
-                    <img src='https://s-media-cache-ak0.pinimg.com/236x/81/a0/a9/81a0a9479b8f60fdb4b364726f2be75a.jpg' />
-                    <Popup>
-                        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-                    </Popup>
-                </Marker>
                 <Polyline color='red' positions={multiPolyline} />
 
             </Map>

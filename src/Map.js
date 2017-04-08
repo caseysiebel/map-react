@@ -57,6 +57,17 @@ export default class MapContainer extends React.Component {
                         })
                     }
                 </LayersControl>
+                <LayersControl position='topright'>
+                    { 
+                        polys.map((poly, i) => {
+                            return (
+                                <Overlay name={i + 1}>
+                                    <Polyline color='red' positions={poly} />
+                                </Overlay>
+                            )
+                        })
+                    }
+                </LayersControl>
             </Map>
         )
     }

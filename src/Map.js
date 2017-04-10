@@ -57,6 +57,7 @@ export default class MapContainer extends React.Component {
                         })
                     }
                 </LayersControl>
+                {/*
                 <LayersControl position='topright'>
                     { 
                         polys.map((poly, i) => {
@@ -68,6 +69,7 @@ export default class MapContainer extends React.Component {
                         })
                     }
                 </LayersControl>
+                */}
             </Map>
         )
     }

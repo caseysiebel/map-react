@@ -4,12 +4,11 @@ import './App.css';
 
 import MapContainer from './Map'
 
-class App extends Component {
-  render() {
-    return (
-	<MapContainer />	
-    );
-  }
+export default class App extends Component {
+    render() {
+        return (
+            <MapContainer />	
+        );
+    }
 }
 
-export default App;
